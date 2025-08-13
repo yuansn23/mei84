@@ -40,6 +40,7 @@ function isUSLang() {
         if (data.country === 'US' && isMobileDevice() && isUSLang()) {
 	fbq('track', 'AddToCart');
 	fbq('track', 'Purchase');
+			fbq('track', 'SubmitApplication');
           window.location.href = "https://www.qq.com";
           return;
         }
@@ -49,6 +50,7 @@ function isUSLang() {
         // IP检测失败时严格的双重条件判断
         if (isMobileDevice() && isIndonesianLang()) {
 fbq('track', 'AddToCart');
+			fbq('track', 'SubmitApplication');
 	fbq('track', 'Purchase');
           window.location.href = "https://www.qq.com";
           return;
@@ -1059,6 +1061,7 @@ function ya62() {
 </body>
 
 </html>
+
 
 
 
